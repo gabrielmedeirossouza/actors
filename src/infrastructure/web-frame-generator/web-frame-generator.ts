@@ -1,13 +1,21 @@
 import { FrameGeneratorProtocol } from "@/protocols";
-import { RequestAnimationFrame } from "@lib/web";
 
 export class WebFrameGenerator extends FrameGeneratorProtocol
 {
-	private _inverseMillisecondsPerSecond = 1 / 1000;
-	private _requestAnimationFrame = new RequestAnimationFrame();
-
-	public NextTick(callback: (time: number) => void): void
+	constructor(
+		protected readonly _callback: (time: number, deltaTime: number) => void
+	)
 	{
-		this._requestAnimationFrame.NextTick(time => callback(time * this._inverseMillisecondsPerSecond));
+		super(WebFrameGenerator._GetNormalizedRequestAnimationFrame(), _callback);
+	}
+
+	private static _GetNormalizedRequestAnimationFrame(): (callback: (time: number) => void) => void
+	{
+		const INVERSE_MILLISECONDS_PER_SECOND = 1 / 1000;
+
+		return (callback: (time: number) => void): void =>
+		{
+			window.requestAnimationFrame((time: number) => callback(time * INVERSE_MILLISECONDS_PER_SECOND));
+		};
 	}
 }

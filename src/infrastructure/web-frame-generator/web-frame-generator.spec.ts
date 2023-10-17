@@ -3,29 +3,23 @@ import { WebFrameGenerator } from './web-frame-generator';
 
 it("Should loop through the frames and generate the web frame", () =>
 {
-	let time = 0;
-	const sut = new WebFrameGenerator();
+	const sut = new WebFrameGenerator(loop);
 
-	sut.NextTick(t => time = t);
-	expect(time).toBe(0);
-	sut.NextTick(t => time = t);
-	expect(time).toBe(1 / 50);
-	sut.NextTick(t => time = t);
-	expect(time).toBe(2 / 50);
-	sut.NextTick(t => time = t);
-	expect(time).toBe(3 / 50);
-	sut.NextTick(t => time = t);
-	expect(time).toBe(4 / 50);
-	sut.NextTick(t => time = t);
-	expect(time).toBe(5 / 50);
-	sut.NextTick(t => time = t);
-	expect(time).toBe(6 / 50);
-	sut.NextTick(t => time = t);
-	expect(time).toBe(7 / 50);
-	sut.NextTick(t => time = t);
-	expect(time).toBe(8 / 50);
-	sut.NextTick(t => time = t);
-	expect(time).toBe(9 / 50);
-	sut.NextTick(t => time = t);
-	expect(time).toBe(10 / 50);
+	let hasCalled = false;
+	let calls = 0;
+	function loop(time: number, deltaTime: number): void
+	{
+		if (time >= 10) sut.Stop();
+		calls++;
+
+		if (!calls) expect(deltaTime).toBeCloseTo(0.02);
+		if (calls === 50) expect(time).toBeCloseTo(1);
+		if (calls === 100) expect(time).toBeCloseTo(2);
+
+		hasCalled = true;
+	}
+
+	sut.Start();
+
+	expect(hasCalled).toBe(true);
 });
