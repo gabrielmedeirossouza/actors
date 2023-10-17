@@ -4,8 +4,7 @@ export class Vector2
     public x: number,
     public y: number
 	)
-	{
-	}
+	{}
 
 	public static get one(): Vector2
 	{
@@ -119,6 +118,11 @@ export class Vector2
 	public Clone(): Vector2
 	{
 		return new Vector2(this.x, this.y);
+	}
+
+	public ToString(fixed = 2): string
+	{
+		return `(${this.x.toFixed(fixed)}, ${this.y.toFixed(fixed)})`;
 	}
 
 	public *[Symbol.iterator](): Generator<number>

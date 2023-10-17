@@ -22,4 +22,4 @@ it("Should loop through the frames and generate the web frame", () =>
 	sut.Start();
 
 	expect(hasCalled).toBe(true);
-});
+}, { repeats: 100 });
