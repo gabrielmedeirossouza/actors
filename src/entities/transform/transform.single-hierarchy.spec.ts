@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { Transform } from './transform';
 import { Vector2 } from '@lib/math';
 
-describe("single hierarchy parent -> child", () =>
+describe("single hierarchy: parent -> child", () =>
 {
 	it('should create empty transform', () =>
 	{
@@ -157,5 +157,51 @@ describe("single hierarchy parent -> child", () =>
 		expect(parent.worldPosition).toEqual({ x: -10, y: -8 });
 		expect(child.localPosition).toEqual({ x: -10, y: -8 });
 		expect(child.worldPosition).toEqual({ x: -20, y: -16 });
+	});
+
+	it("should stay in place after parent or child detach", () =>
+	{
+		const parent = new Transform(new Vector2(5, 5));
+		const child = new Transform(new Vector2(10, 10));
+
+		parent.AttachChild(child);
+		parent.worldPosition = new Vector2(0, 0);
+		parent.DetachChild(child);
+		parent.worldPosition = new Vector2(25, 25);
+
+		expect(parent.localPosition).toEqual({ x: 25, y: 25 });
+		expect(parent.worldPosition).toEqual({ x: 25, y: 25 });
+		expect(child.localPosition).toEqual({ x: 5, y: 5 });
+		expect(child.worldPosition).toEqual({ x: 5, y: 5 });
+
+		child.SetParent(parent);
+		child.worldPosition = new Vector2(0, 0);
+		child.UnsetParent();
+		child.worldPosition = new Vector2(35, 35);
+
+		expect(parent.localPosition).toEqual({ x: 25, y: 25 });
+		expect(parent.worldPosition).toEqual({ x: 25, y: 25 });
+		expect(child.localPosition).toEqual({ x: 35, y: 35 });
+		expect(child.worldPosition).toEqual({ x: 35, y: 35 });
+
+		parent.AttachChild(child);
+		parent.localPosition = new Vector2(0, 0);
+		parent.DetachChild(child);
+		parent.localPosition = new Vector2(25, 25);
+
+		expect(parent.localPosition).toEqual({ x: 25, y: 25 });
+		expect(parent.worldPosition).toEqual({ x: 25, y: 25 });
+		expect(child.localPosition).toEqual({ x: 10, y: 10 });
+		expect(child.worldPosition).toEqual({ x: 10, y: 10 });
+
+		child.SetParent(parent);
+		child.localPosition = new Vector2(0, 0);
+		child.UnsetParent();
+		child.localPosition = new Vector2(35, 35);
+
+		expect(parent.localPosition).toEqual({ x: 25, y: 25 });
+		expect(parent.worldPosition).toEqual({ x: 25, y: 25 });
+		expect(child.localPosition).toEqual({ x: 35, y: 35 });
+		expect(child.worldPosition).toEqual({ x: 35, y: 35 });
 	});
 });

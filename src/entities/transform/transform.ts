@@ -43,25 +43,15 @@ export class Transform extends ComponentProtocol
 
 	public set localPosition(value: Vector2)
 	{
-		this._worldPosition = Vector2.Add(
-			this._deltaPosition,
-			value
-		);
+		const deltaWorldPosition = Vector2.Subtract(value, this.worldPosition);
 		this._localPosition = value;
 
-		this.children.forEach(child =>
+		this._worldPosition = Vector2.Add(this._localPosition, this._parent?.worldPosition || Vector2.zero);
+
+		this._children.forEach(child =>
 		{
-			child.localPosition = value;
+			child.worldPosition = Vector2.Add(child.worldPosition, deltaWorldPosition);
 		});
-		// const deltaWorldPosition = Vector2.Subtract(value, this.worldPosition);
-		// this._localPosition = value;
-
-		// this._worldPosition = Vector2.Add(this._localPosition, this._parent?.worldPosition || Vector2.zero);
-
-		// this._children.forEach(child =>
-		// {
-		// 	child.worldPosition = Vector2.Add(child.worldPosition, deltaWorldPosition);
-		// });
 	}
 
 	public get worldPosition(): Readonly<Vector2>
@@ -146,10 +136,5 @@ export class Transform extends ComponentProtocol
 
 		this._children.splice(index, 1);
 		child.UnsetParent();
-	}
-
-	private get _deltaPosition(): Readonly<Vector2>
-	{
-		return Vector2.Subtract(this._worldPosition, this._localPosition);
 	}
 }
