@@ -10,8 +10,7 @@ export class Actor
 		public readonly transform: Transform,
 		public readonly componentManager: ComponentManager
 	)
-	{
-	}
+	{}
 
 	public get name(): string
 	{

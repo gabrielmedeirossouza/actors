@@ -31,6 +31,39 @@ export class Transform extends ComponentProtocol
 		return this._parent;
 	}
 
+	public get children(): ReadonlyArray<Transform>
+	{
+		return this._children;
+	}
+
+	public get localPosition(): Readonly<Vector2>
+	{
+		return this._localPosition;
+	}
+
+	public set localPosition(value: Vector2)
+	{
+		this._worldPosition = Vector2.Add(
+			this._deltaPosition,
+			value
+		);
+		this._localPosition = value;
+
+		this.children.forEach(child =>
+		{
+			child.localPosition = value;
+		});
+		// const deltaWorldPosition = Vector2.Subtract(value, this.worldPosition);
+		// this._localPosition = value;
+
+		// this._worldPosition = Vector2.Add(this._localPosition, this._parent?.worldPosition || Vector2.zero);
+
+		// this._children.forEach(child =>
+		// {
+		// 	child.worldPosition = Vector2.Add(child.worldPosition, deltaWorldPosition);
+		// });
+	}
+
 	public get worldPosition(): Readonly<Vector2>
 	{
 		return this._worldPosition;
@@ -41,9 +74,6 @@ export class Transform extends ComponentProtocol
 		const deltaWorldPosition = Vector2.Subtract(value, this.worldPosition);
 		this._worldPosition = value;
 
-		/**
-		 * pl¹ = pw¹ - pw²
-		 */
 		this._localPosition = Vector2.Subtract(this._worldPosition, this._parent?.worldPosition || Vector2.zero);
 
 		this._children.forEach(child =>
@@ -52,39 +82,48 @@ export class Transform extends ComponentProtocol
 		});
 	}
 
-	public get localPosition(): Readonly<Vector2>
+	public get localRotation(): Readonly<number>
 	{
-		return this._localPosition;
+		return this._localRotation;
 	}
 
-	public set localPosition(value: Vector2)
+	public set localRotation(value: number)
 	{
-		const deltaWorldPosition = Vector2.Subtract(value, this.worldPosition);
-		this._localPosition = value;
+		this._localRotation = value;
+	}
 
-		/**
-		 * pw¹ = pl¹ + pw²
-		 */
-		this._worldPosition = Vector2.Add(this._localPosition, this._parent?.worldPosition || Vector2.zero);
+	public get worldRotation(): Readonly<number>
+	{
+		return this._worldRotation;
+	}
 
-		this._children.forEach(child =>
-		{
-			child.worldPosition = Vector2.Add(child.worldPosition, deltaWorldPosition);
-		});
+	public set worldRotation(value: number)
+	{
+		this._worldRotation = value;
+	}
+
+	public get scale(): Readonly<Vector2>
+	{
+		return this._scale;
+	}
+
+	public set scale(value: Vector2)
+	{
+		this._scale = value;
 	}
 
 	public SetParent(parent: Transform): void
 	{
 		this._parent = parent;
+		parent._children.push(this);
 
-		/**
-		 * pl¹ = pw¹ - pw²
-		 */
 		this._localPosition = Vector2.Subtract(this._worldPosition, parent.worldPosition);
 	}
 
 	public UnsetParent(): void
 	{
+		if (!this._parent) return;
+		this._parent.DetachChild(this);
 		this._parent = undefined;
 
 		this._localPosition = this._worldPosition;
@@ -93,6 +132,8 @@ export class Transform extends ComponentProtocol
 	public AttachChild(child: Transform): Transform
 	{
 		this._children.push(child);
+		child._parent = this;
+		child._localPosition = Vector2.Subtract(child._worldPosition, this.worldPosition);
 
 		return child;
 	}
@@ -104,5 +145,11 @@ export class Transform extends ComponentProtocol
 		if (index === -1) return;
 
 		this._children.splice(index, 1);
+		child.UnsetParent();
+	}
+
+	private get _deltaPosition(): Readonly<Vector2>
+	{
+		return Vector2.Subtract(this._worldPosition, this._localPosition);
 	}
 }
