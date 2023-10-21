@@ -330,6 +330,8 @@ describe("multiple hierarchy: parent -> child -> child", () =>
 
 		childA.SetParent(parent);
 		childB.SetParent(childA);
+		console.log(parent.localPosition, parent.worldPosition);
+		console.log(childA.localPosition, childA.worldPosition);
 
 		childB.localPosition = new Vector2(0, 0);
 		childB.UnsetParent();

@@ -43,14 +43,13 @@ export class Transform extends ComponentProtocol
 
 	public set localPosition(value: Vector2)
 	{
-		const deltaWorldPosition = Vector2.Subtract(value, this.worldPosition);
 		this._localPosition = value;
 
-		this._worldPosition = Vector2.Add(this._localPosition, this._parent?.worldPosition || Vector2.zero);
+		this._worldPosition = Vector2.Add(this.localPosition, this._parent?.worldPosition || Vector2.zero);
 
 		this._children.forEach(child =>
 		{
-			child.worldPosition = Vector2.Add(child.worldPosition, deltaWorldPosition);
+			child.localPosition = child.localPosition;
 		});
 	}
 
@@ -64,7 +63,7 @@ export class Transform extends ComponentProtocol
 		const deltaWorldPosition = Vector2.Subtract(value, this.worldPosition);
 		this._worldPosition = value;
 
-		this._localPosition = Vector2.Subtract(this._worldPosition, this._parent?.worldPosition || Vector2.zero);
+		this._localPosition = Vector2.Subtract(this.worldPosition, this._parent?.worldPosition || Vector2.zero);
 
 		this._children.forEach(child =>
 		{
@@ -113,6 +112,7 @@ export class Transform extends ComponentProtocol
 	public UnsetParent(): void
 	{
 		if (!this._parent) return;
+
 		this._parent.DetachChild(this);
 		this._parent = undefined;
 
