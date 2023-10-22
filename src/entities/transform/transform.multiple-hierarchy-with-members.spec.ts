@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { Transform } from './transform';
 import { Vector2 } from '@lib/math';
 
-describe("multiple hierarchy: parent -> child -> child", () =>
+describe("multiple hierarchy with members: parent -> child + child -> child + child", () =>
 {
 	it('should create empty transform', () =>
 	{
@@ -330,8 +330,6 @@ describe("multiple hierarchy: parent -> child -> child", () =>
 
 		childA.SetParent(parent);
 		childB.SetParent(childA);
-		console.log(parent.localPosition, parent.worldPosition);
-		console.log(childA.localPosition, childA.worldPosition);
 
 		childB.localPosition = new Vector2(0, 0);
 		childB.UnsetParent();
