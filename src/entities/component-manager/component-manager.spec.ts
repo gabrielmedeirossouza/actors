@@ -2,10 +2,10 @@ import { it, expect } from 'vitest';
 import { ComponentManager } from './component-manager';
 import { PhysicsProtocol, RendererProtocol } from '@/protocols';
 
-class RendererTest extends RendererProtocol
+class RendererMock extends RendererProtocol
 {}
 
-class PhysicsTest extends PhysicsProtocol
+class PhysicsMock extends PhysicsProtocol
 {}
 
 it("should create a empty component manager", () =>
@@ -19,7 +19,7 @@ it("should create a empty component manager", () =>
 it("should add a renderer", () =>
 {
 	const componentManager = new ComponentManager();
-	const renderer = new RendererTest();
+	const renderer = new RendererMock();
 
 	componentManager.AddRenderer(renderer);
 
@@ -29,8 +29,8 @@ it("should add a renderer", () =>
 it("should remove a renderer", () =>
 {
 	const componentManager = new ComponentManager();
-	const rendererA = new RendererTest();
-	const rendererB = new RendererTest();
+	const rendererA = new RendererMock();
+	const rendererB = new RendererMock();
 
 	componentManager.AddRenderer(rendererA);
 	componentManager.AddRenderer(rendererB);
@@ -42,7 +42,7 @@ it("should remove a renderer", () =>
 it("should add a physics", () =>
 {
 	const componentManager = new ComponentManager();
-	const physics = new PhysicsTest();
+	const physics = new PhysicsMock();
 
 	componentManager.AddPhysics(physics);
 
@@ -52,8 +52,8 @@ it("should add a physics", () =>
 it("should remove a physics", () =>
 {
 	const componentManager = new ComponentManager();
-	const physicsA = new PhysicsTest();
-	const physicsB = new PhysicsTest();
+	const physicsA = new PhysicsMock();
+	const physicsB = new PhysicsMock();
 
 	componentManager.AddPhysics(physicsA);
 	componentManager.AddPhysics(physicsB);
