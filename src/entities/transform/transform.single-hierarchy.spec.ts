@@ -17,7 +17,7 @@ describe("single hierarchy: parent -> child", () =>
 		expect(transform.scale).toEqual({ x: 1, y: 1 });
 	});
 
-	it("should attach parent", () =>
+	it("should SetParent", () =>
 	{
 		const parent = new Transform(new Vector2(5, 5));
 		const child = new Transform(new Vector2(10, 10));
@@ -33,7 +33,7 @@ describe("single hierarchy: parent -> child", () =>
 		expect(child.worldPosition).toEqual({ x: 10, y: 10 });
 	});
 
-	it("should detach parent", () =>
+	it("should UnsetParent", () =>
 	{
 		const parent = new Transform(new Vector2(5, 5));
 		const child = new Transform(new Vector2(10, 10));
@@ -50,45 +50,12 @@ describe("single hierarchy: parent -> child", () =>
 		expect(child.worldPosition).toEqual({ x: 10, y: 10 });
 	});
 
-	it("should attach child", () =>
-	{
-		const parent = new Transform(new Vector2(5, 5));
-		const child = new Transform(new Vector2(10, 10));
-
-		parent.AttachChild(child);
-
-		expect(child.parent).toBe(parent);
-		expect(parent.children).toContain(child);
-		expect(parent.children.length).toBe(1);
-		expect(parent.localPosition).toEqual({ x: 5, y: 5 });
-		expect(parent.worldPosition).toEqual({ x: 5, y: 5 });
-		expect(child.localPosition).toEqual({ x: 5, y: 5 });
-		expect(child.worldPosition).toEqual({ x: 10, y: 10 });
-	});
-
-	it("should detach child", () =>
-	{
-		const parent = new Transform(new Vector2(5, 5));
-		const child = new Transform(new Vector2(10, 10));
-
-		parent.AttachChild(child);
-		parent.DetachChild(child);
-
-		expect(child.parent).toBe(undefined);
-		expect(parent.children).not.toContain(child);
-		expect(parent.children.length).toBe(0);
-		expect(parent.localPosition).toEqual({ x: 5, y: 5 });
-		expect(parent.worldPosition).toEqual({ x: 5, y: 5 });
-		expect(child.localPosition).toEqual({ x: 10, y: 10 });
-		expect(child.worldPosition).toEqual({ x: 10, y: 10 });
-	});
-
 	it("should change parent and child worldPosition", () =>
 	{
 		const parent = new Transform(new Vector2(5, 5));
 		const child = new Transform(new Vector2(10, 10));
 
-		parent.AttachChild(child);
+		child.SetParent(parent);
 
 		parent.worldPosition = new Vector2(5, 5);
 		expect(parent.localPosition).toEqual({ x: 5, y: 5 });
@@ -126,7 +93,7 @@ describe("single hierarchy: parent -> child", () =>
 		const parent = new Transform(new Vector2(5, 5));
 		const child = new Transform(new Vector2(10, 10));
 
-		parent.AttachChild(child);
+		child.SetParent(parent);
 
 		parent.localPosition = new Vector2(5, 5);
 		expect(parent.localPosition).toEqual({ x: 5, y: 5 });
@@ -159,14 +126,14 @@ describe("single hierarchy: parent -> child", () =>
 		expect(child.worldPosition).toEqual({ x: -20, y: -16 });
 	});
 
-	it("should stay in place after parent or child detach", () =>
+	it("should stay in place after UnsetParent", () =>
 	{
 		const parent = new Transform(new Vector2(5, 5));
 		const child = new Transform(new Vector2(10, 10));
 
-		parent.AttachChild(child);
+		child.SetParent(parent);
 		parent.worldPosition = new Vector2(0, 0);
-		parent.DetachChild(child);
+		child.UnsetParent();
 		parent.worldPosition = new Vector2(25, 25);
 
 		expect(parent.localPosition).toEqual({ x: 25, y: 25 });
@@ -184,9 +151,9 @@ describe("single hierarchy: parent -> child", () =>
 		expect(child.localPosition).toEqual({ x: 35, y: 35 });
 		expect(child.worldPosition).toEqual({ x: 35, y: 35 });
 
-		parent.AttachChild(child);
+		child.SetParent(parent);
 		parent.localPosition = new Vector2(0, 0);
-		parent.DetachChild(child);
+		child.UnsetParent();
 		parent.localPosition = new Vector2(25, 25);
 
 		expect(parent.localPosition).toEqual({ x: 25, y: 25 });

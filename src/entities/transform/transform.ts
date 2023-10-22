@@ -103,6 +103,8 @@ export class Transform extends ComponentProtocol
 
 	public SetParent(parent: Transform): void
 	{
+		if (this._IsDescendant(parent)) throw new Error("Parent is descendent of child. A -> B could not be B -> A if A contains B as a child. If you want to move B -> A, first remove this hierarchy.");
+		this.parent?._DetachChild(this);
 		this._parent = parent;
 		parent._children.push(this);
 
@@ -113,28 +115,24 @@ export class Transform extends ComponentProtocol
 	{
 		if (!this._parent) return;
 
-		this._parent.DetachChild(this);
+		this._parent._DetachChild(this);
 		this._parent = undefined;
 
 		this._localPosition = this._worldPosition;
 	}
 
-	public AttachChild(child: Transform): Transform
-	{
-		this._children.push(child);
-		child._parent = this;
-		child._localPosition = Vector2.Subtract(child._worldPosition, this.worldPosition);
-
-		return child;
-	}
-
-	public DetachChild(child: Transform): void
+	private _DetachChild(child: Transform): void
 	{
 		const index = this._children.findIndex(c => c.id === child.id);
 
 		if (index === -1) return;
 
 		this._children.splice(index, 1);
-		child.UnsetParent();
+		child._parent = undefined;
+	}
+
+	private _IsDescendant(descendant: Transform): boolean
+	{
+		return this._children.some(child => child.id === descendant.id || child._IsDescendant(descendant));
 	}
 }
