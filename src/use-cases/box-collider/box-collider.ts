@@ -13,8 +13,11 @@ export class BoxCollider extends ColliderProtocol
 		super(transform);
 	}
 
-	public IsColliding(other: BoxCollider): boolean
+	public IsColliding(other: ColliderProtocol): boolean
 	{
+		// TODO: refactor this to a chain of responsibility.
+		if (!(other instanceof BoxCollider)) throw new Error("BoxCollider->IsColliding: other is not a BoxCollider. Implementation missing.");
+
 		const thisX = this._transform.worldPosition.x - this.pivot.x * this.width;
 		const thisY = this._transform.worldPosition.y - this.pivot.y * this.height;
 		const thisWidth = this.width;
