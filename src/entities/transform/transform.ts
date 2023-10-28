@@ -1,5 +1,5 @@
 import { ComponentProtocol } from "@/protocols";
-import { Vector2 } from "@lib/math";
+import { Vector2 } from "..";
 
 export class Transform extends ComponentProtocol
 {

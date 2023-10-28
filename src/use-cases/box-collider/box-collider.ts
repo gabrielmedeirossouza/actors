@@ -1,17 +1,16 @@
-import { PhysicsProtocol } from "@/protocols";
-import { Transform } from "..";
-import { Vector2 } from "@lib/math";
+import { ColliderProtocol } from "@/protocols";
+import { Transform, Vector2 } from "@/entities";
 
-export class BoxCollider extends PhysicsProtocol
+export class BoxCollider extends ColliderProtocol
 {
 	constructor(
-    private readonly _transform: Transform,
+		transform: Transform,
     public width: number,
     public height: number,
     public pivot: Vector2
 	)
 	{
-		super();
+		super(transform);
 	}
 
 	public IsColliding(other: BoxCollider): boolean

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { Transform } from './transform';
-import { Vector2 } from '@lib/math';
+import { Vector2 } from '..';
 
 /**
  * parent

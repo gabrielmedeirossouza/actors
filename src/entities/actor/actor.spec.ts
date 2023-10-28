@@ -2,10 +2,12 @@ import { it, expect } from 'vitest';
 import { Actor } from '.';
 import { Transform, ComponentManager } from '..';
 
-it('should be true', () =>
+it('should create an actor', () =>
 {
 	const componentManager = new ComponentManager();
 	const actor = new Actor("player-1", new Transform(), componentManager);
 
-	expect(true).toBe(true);
+	expect(actor.name).toBe("player-1");
+	expect(actor.transform).toBeInstanceOf(Transform);
+	expect(actor.componentManager).toBeInstanceOf(ComponentManager);
 });
