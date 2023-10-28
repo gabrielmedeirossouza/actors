@@ -2,14 +2,14 @@ import { ComponentProtocol } from ".";
 
 export abstract class PhysicsProtocol extends ComponentProtocol
 {
-	public NotifyPhysicsLoop(): void
+	public NotifyPhysicsLoop(time: number, deltaTime: number): void
 	{
-		this.BeforeUpdatePhysics?.();
-		this.UpdatePhysics?.();
-		this.AfterUpdatePhysics?.();
+		this.BeforeUpdatePhysics?.(time, deltaTime);
+		this.UpdatePhysics?.(time, deltaTime);
+		this.AfterUpdatePhysics?.(time, deltaTime);
 	}
 
-	public BeforeUpdatePhysics?(): void;
-	public UpdatePhysics?(): void;
-	public AfterUpdatePhysics?(): void;
+	public BeforeUpdatePhysics?(time: number, deltaTime: number): void;
+	public UpdatePhysics?(time: number, deltaTime: number): void;
+	public AfterUpdatePhysics?(time: number, deltaTime: number): void;
 }

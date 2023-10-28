@@ -4,7 +4,7 @@ export class Scene
 {
 	private _actors: Actor[] = [];
 
-	public get Actors(): ReadonlyArray<Actor>
+	public get actors(): ReadonlyArray<Actor>
 	{
 		return this._actors;
 	}
@@ -20,5 +20,13 @@ export class Scene
 		if (index === -1) return;
 
 		this._actors.splice(index, 1);
+	}
+
+	public NotifyUpdate(time: number, deltaTime: number): void
+	{
+		this._actors.forEach(actor =>
+		{
+			actor.componentManager.NotifyUpdate(time, deltaTime);
+		});
 	}
 }

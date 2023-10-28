@@ -2,10 +2,10 @@ import { ComponentProtocol } from ".";
 
 export abstract class RendererProtocol extends ComponentProtocol
 {
-	public NotifyRendererLoop(): void
+	public NotifyRendererLoop(time: number, deltaTime: number): void
 	{
-		this.AfterUpdate?.();
+		this.AfterUpdate?.(time, deltaTime);
 	}
 
-	public AfterUpdate?(): void;
+	public AfterUpdate?(time: number, deltaTime: number): void;
 }

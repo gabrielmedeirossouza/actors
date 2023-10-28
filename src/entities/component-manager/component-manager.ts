@@ -40,4 +40,17 @@ export class ComponentManager
 
 		this._physics.splice(index, 1);
 	}
+
+	public NotifyUpdate(time: number, deltaTime: number): void
+	{
+		this._physics.forEach(physics =>
+		{
+			physics.NotifyPhysicsLoop(time, deltaTime);
+		});
+
+		this._renderers.forEach(renderer =>
+		{
+			renderer.NotifyRendererLoop(time, deltaTime);
+		});
+	}
 }
