@@ -1,1 +1,1 @@
-export * from './box-collider';
+export * from './colliders';

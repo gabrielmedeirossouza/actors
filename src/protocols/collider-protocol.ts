@@ -3,12 +3,12 @@ import { PhysicsProtocol } from "./physics-protocol";
 
 export abstract class ColliderProtocol extends PhysicsProtocol
 {
+	public isTrigger = false;
+
 	constructor(
-    protected _transform: Transform
+    public readonly transform: Transform
 	)
 	{
 		super();
 	}
-
-  public abstract IsColliding(other: ColliderProtocol): boolean
 }
