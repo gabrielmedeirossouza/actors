@@ -159,12 +159,19 @@ test("magnitudeSquared", () =>
 	expect(sut).toBe(25);
 });
 
-test("normalize", () =>
+test.each([
+	{ sut: new Vector2(3, 4), expected: new Vector2(3 / 5, 4 / 5) },
+	{ sut: new Vector2(0, 0), expected: new Vector2(0, 0) },
+	{ sut: new Vector2(1, 0), expected: new Vector2(1, 0) },
+	{ sut: new Vector2(0, 1), expected: new Vector2(0, 1) },
+	{ sut: new Vector2(-1, 0), expected: new Vector2(-1, 0) },
+	{ sut: new Vector2(0, -1), expected: new Vector2(0, -1) },
+	{ sut: new Vector2(-1, -1), expected: new Vector2(-1 / Math.sqrt(2), -1 / Math.sqrt(2)) },
+	{ sut: new Vector2(1, 1), expected: new Vector2(1 / Math.sqrt(2), 1 / Math.sqrt(2)) },
+])("normalized %#", ({ sut, expected }) =>
 {
-	const a = new Vector2(3, 4);
-	const sut = a.normalized;
-	expect(sut.x).toBe(3 / 5);
-	expect(sut.y).toBe(4 / 5);
+	expect(sut.normalized.x).toBe(expected.x);
+	expect(sut.normalized.y).toBe(expected.y);
 });
 
 test("Clone", () =>

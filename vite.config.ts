@@ -9,8 +9,6 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'@': path.resolve(__dirname, './src'),
-			'@lib/crypto': path.resolve(__dirname, './lib/crypto'),
-			'@lib/math-util': path.resolve(__dirname, './lib/math-util'),
 		},
 	},
 	test: {

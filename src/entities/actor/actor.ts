@@ -1,4 +1,4 @@
-import { Crypto } from '@lib/crypto';
+import { Crypto } from '@/helpers/crypto-helper';
 import { ComponentManager, Transform } from '../';
 
 export class Actor
