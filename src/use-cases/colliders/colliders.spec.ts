@@ -2,6 +2,7 @@ import { it, expect } from 'vitest';
 import { BoxCollider, CircleCollider, Transform, Vector2 } from '@/entities';
 import { BoxBoxColliderDetectionHandler } from './box-box-collider-detection-handler';
 import { BoxCircleColliderDetectionHandler } from './box-circle-collider-detection-handler';
+import { CircleCircleColliderDetectionHandler } from './circle-circle-collider-detection-handler';
 
 it.each([
 	{
@@ -132,6 +133,64 @@ it.each([
 {
 	const boxCircle = new BoxBoxColliderDetectionHandler();
 	const handler = new BoxCircleColliderDetectionHandler(boxCircle);
+
+	expect(handler.IsColliding(a, b)).toBe(false);
+	expect(handler.IsColliding(b, a)).toBe(false);
+});
+
+it.each([
+	{
+		a: new CircleCollider(new Transform(new Vector2(100, 0)), 51),
+		b: new CircleCollider(new Transform(new Vector2(25, 0)), 25)
+	},
+	{
+		a: new CircleCollider(new Transform(new Vector2(140, 0)), 100),
+		b: new CircleCollider(new Transform(new Vector2(10, 0)), 31)
+	},
+	{
+		a: new CircleCollider(new Transform(new Vector2(-35, 0)), 40),
+		b: new CircleCollider(new Transform(new Vector2(15, 0)), 11)
+	},
+	{
+		a: new CircleCollider(new Transform(new Vector2(100, 200)), 100),
+		b: new CircleCollider(new Transform(new Vector2(25, 150)), 25)
+	},
+	{
+		a: new CircleCollider(new Transform(new Vector2(100, -30)), 100),
+		b: new CircleCollider(new Transform(new Vector2(25, -40)), 25)
+	},
+])("Should collide CIRCLE CIRCLE %#", ({ a, b }) =>
+{
+	const handler = new CircleCircleColliderDetectionHandler();
+
+	expect(handler.IsColliding(a, b)).toBe(true);
+	expect(handler.IsColliding(b, a)).toBe(true);
+});
+
+it.each([
+	{
+		a: new CircleCollider(new Transform(new Vector2(100, 0)), 50),
+		b: new CircleCollider(new Transform(new Vector2(25, 0)), 25)
+	},
+	{
+		a: new CircleCollider(new Transform(new Vector2(140, 0)), 100),
+		b: new CircleCollider(new Transform(new Vector2(10, 0)), 30)
+	},
+	{
+		a: new CircleCollider(new Transform(new Vector2(-35, 0)), 40),
+		b: new CircleCollider(new Transform(new Vector2(15, 0)), 10)
+	},
+	{
+		a: new CircleCollider(new Transform(new Vector2(100, 200)), 100),
+		b: new CircleCollider(new Transform(new Vector2(25, 25)), 25)
+	},
+	{
+		a: new CircleCollider(new Transform(new Vector2(100, -30)), 100),
+		b: new CircleCollider(new Transform(new Vector2(25, -130)), 25)
+	},
+])("Should not collide CIRCLE CIRCLE %#", ({ a, b }) =>
+{
+	const handler = new CircleCircleColliderDetectionHandler();
 
 	expect(handler.IsColliding(a, b)).toBe(false);
 	expect(handler.IsColliding(b, a)).toBe(false);
