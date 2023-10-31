@@ -1,1 +1,1 @@
-export * from './colliders';
+export * from './colliders-detection-handler';
