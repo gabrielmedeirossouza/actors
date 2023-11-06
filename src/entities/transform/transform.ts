@@ -1,4 +1,4 @@
-import { ComponentProtocol } from "@/protocols";
+import { ComponentProtocol, IdGeneratorProtocol } from "@/protocols";
 import { Vector2 } from "..";
 
 export class Transform extends ComponentProtocol
@@ -12,12 +12,13 @@ export class Transform extends ComponentProtocol
 	private _scale: Vector2;
 
 	constructor(
+		idGenerator: IdGeneratorProtocol,
 		position = Vector2.zero,
 		rotation = 0,
 		scale = Vector2.one
 	)
 	{
-		super();
+		super(idGenerator);
 
 		this._localPosition = position;
 		this._worldPosition = position;

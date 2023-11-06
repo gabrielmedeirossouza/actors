@@ -1,4 +1,4 @@
-import { ColliderProtocol } from "@/protocols";
+import { ColliderProtocol, IdGeneratorProtocol } from "@/protocols";
 import { Transform } from "@/entities";
 
 export class BoxCollider extends ColliderProtocol
@@ -7,12 +7,13 @@ export class BoxCollider extends ColliderProtocol
 	private _height: number;
 
 	constructor(
+		idGenerator: IdGeneratorProtocol,
 		transform: Transform,
 		width: number,
 		height: number
 	)
 	{
-		super(transform);
+		super(idGenerator, transform);
 		this._width = this._GetVerifiedWidth(width);
 		this._height = this._GetVerifiedHeight(height);
 	}

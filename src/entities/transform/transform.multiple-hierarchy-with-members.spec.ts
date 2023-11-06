@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { Transform } from './transform';
 import { Vector2 } from '..';
+import { FakeIdGenerator } from '@/__test__';
 
 /**
  * parent
@@ -10,15 +11,17 @@ import { Vector2 } from '..';
  * 		- childD
  */
 
+const fakeIdGenerator = new FakeIdGenerator();
+
 describe("multiple hierarchy with members: parent -> childA + childB -> childC + childD", () =>
 {
 	it("should SetParent", () =>
 	{
-		const parent = new Transform(new Vector2(5, 5));
-		const childA = new Transform(new Vector2(10, 10));
-		const childB = new Transform(new Vector2(15, 2));
-		const childC = new Transform(new Vector2(17, 6));
-		const childD = new Transform(new Vector2(20, 25));
+		const parent = new Transform(fakeIdGenerator, new Vector2(5, 5));
+		const childA = new Transform(fakeIdGenerator, new Vector2(10, 10));
+		const childB = new Transform(fakeIdGenerator, new Vector2(15, 2));
+		const childC = new Transform(fakeIdGenerator, new Vector2(17, 6));
+		const childD = new Transform(fakeIdGenerator, new Vector2(20, 25));
 
 		childA.SetParent(parent);
 		childB.SetParent(parent);
@@ -49,11 +52,11 @@ describe("multiple hierarchy with members: parent -> childA + childB -> childC +
 
 	it("should DetachParent", () =>
 	{
-		const parent = new Transform(new Vector2(5, 5));
-		const childA = new Transform(new Vector2(10, 10));
-		const childB = new Transform(new Vector2(15, 2));
-		const childC = new Transform(new Vector2(17, 6));
-		const childD = new Transform(new Vector2(20, 25));
+		const parent = new Transform(fakeIdGenerator, new Vector2(5, 5));
+		const childA = new Transform(fakeIdGenerator, new Vector2(10, 10));
+		const childB = new Transform(fakeIdGenerator, new Vector2(15, 2));
+		const childC = new Transform(fakeIdGenerator, new Vector2(17, 6));
+		const childD = new Transform(fakeIdGenerator, new Vector2(20, 25));
 
 		childA.SetParent(parent);
 		childB.SetParent(parent);
@@ -157,11 +160,11 @@ describe("multiple hierarchy with members: parent -> childA + childB -> childC +
 
 	it("should have unique transform relationship", () =>
 	{
-		const parent = new Transform(new Vector2(5, 5));
-		const childA = new Transform(new Vector2(10, 10));
-		const childB = new Transform(new Vector2(15, 2));
-		const childC = new Transform(new Vector2(17, 6));
-		const childD = new Transform(new Vector2(20, 25));
+		const parent = new Transform(fakeIdGenerator, new Vector2(5, 5));
+		const childA = new Transform(fakeIdGenerator, new Vector2(10, 10));
+		const childB = new Transform(fakeIdGenerator, new Vector2(15, 2));
+		const childC = new Transform(fakeIdGenerator, new Vector2(17, 6));
+		const childD = new Transform(fakeIdGenerator, new Vector2(20, 25));
 
 		childA.SetParent(parent);
 		childB.SetParent(parent);
@@ -186,11 +189,11 @@ describe("multiple hierarchy with members: parent -> childA + childB -> childC +
 
 	it("should change parent and child worldPosition", () =>
 	{
-		const parent = new Transform(new Vector2(5, 5));
-		const childA = new Transform(new Vector2(10, 10));
-		const childB = new Transform(new Vector2(15, 2));
-		const childC = new Transform(new Vector2(17, 6));
-		const childD = new Transform(new Vector2(20, 25));
+		const parent = new Transform(fakeIdGenerator, new Vector2(5, 5));
+		const childA = new Transform(fakeIdGenerator, new Vector2(10, 10));
+		const childB = new Transform(fakeIdGenerator, new Vector2(15, 2));
+		const childC = new Transform(fakeIdGenerator, new Vector2(17, 6));
+		const childD = new Transform(fakeIdGenerator, new Vector2(20, 25));
 
 		childA.SetParent(parent);
 		childB.SetParent(parent);
@@ -272,11 +275,11 @@ describe("multiple hierarchy with members: parent -> childA + childB -> childC +
 
 	it("should change parent and child localPosition", () =>
 	{
-		const parent = new Transform(new Vector2(5, 5));
-		const childA = new Transform(new Vector2(10, 10));
-		const childB = new Transform(new Vector2(15, 2));
-		const childC = new Transform(new Vector2(17, 6));
-		const childD = new Transform(new Vector2(20, 25));
+		const parent = new Transform(fakeIdGenerator, new Vector2(5, 5));
+		const childA = new Transform(fakeIdGenerator, new Vector2(10, 10));
+		const childB = new Transform(fakeIdGenerator, new Vector2(15, 2));
+		const childC = new Transform(fakeIdGenerator, new Vector2(17, 6));
+		const childD = new Transform(fakeIdGenerator, new Vector2(20, 25));
 
 		childA.SetParent(parent);
 		childB.SetParent(parent);
@@ -346,11 +349,11 @@ describe("multiple hierarchy with members: parent -> childA + childB -> childC +
 
 	it("should stay in place after UnsetParent", () =>
 	{
-		const parent = new Transform(new Vector2(5, 5));
-		const childA = new Transform(new Vector2(10, 10));
-		const childB = new Transform(new Vector2(15, 2));
-		const childC = new Transform(new Vector2(17, 6));
-		const childD = new Transform(new Vector2(20, 25));
+		const parent = new Transform(fakeIdGenerator, new Vector2(5, 5));
+		const childA = new Transform(fakeIdGenerator, new Vector2(10, 10));
+		const childB = new Transform(fakeIdGenerator, new Vector2(15, 2));
+		const childC = new Transform(fakeIdGenerator, new Vector2(17, 6));
+		const childD = new Transform(fakeIdGenerator, new Vector2(20, 25));
 
 		childA.SetParent(parent);
 		childB.SetParent(parent);
