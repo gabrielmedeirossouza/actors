@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { RigidTransform } from './transform';
+import { RigidTransform } from './rigid-transform';
 import { Vector2 } from '..';
 import { FakeIdGenerator } from '@/__test__';
 
