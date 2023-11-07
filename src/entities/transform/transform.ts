@@ -1,10 +1,10 @@
-import { ComponentProtocol, IdGeneratorProtocol } from "@/protocols";
+import { TransformProtocol, IdGeneratorProtocol } from "@/protocols";
 import { Vector2 } from "..";
 
-export class Transform extends ComponentProtocol
+export class RigidTransform extends TransformProtocol
 {
-	private _parent?: Transform;
-	private _children: Transform[] = [];
+	private _parent?: RigidTransform;
+	private _children: RigidTransform[] = [];
 	private _localPosition: Vector2;
 	private _worldPosition: Vector2;
 	private _localRotation: number;
@@ -27,12 +27,12 @@ export class Transform extends ComponentProtocol
 		this._scale = scale;
 	}
 
-	public get parent(): Transform | undefined
+	public get parent(): RigidTransform | undefined
 	{
 		return this._parent;
 	}
 
-	public get children(): ReadonlyArray<Transform>
+	public get children(): ReadonlyArray<RigidTransform>
 	{
 		return this._children;
 	}
@@ -102,7 +102,7 @@ export class Transform extends ComponentProtocol
 		this._scale = value;
 	}
 
-	public SetParent(parent: Transform): void
+	public SetParent(parent: RigidTransform): void
 	{
 		if (this._IsDescendant(parent)) throw new Error("Parent is descendent of child. A -> B could not be B -> A if A contains B as a child. If you want to move B -> A, first remove this hierarchy.");
 		this.parent?._DetachChild(this);
@@ -122,7 +122,7 @@ export class Transform extends ComponentProtocol
 		this._localPosition = this._worldPosition;
 	}
 
-	private _DetachChild(child: Transform): void
+	private _DetachChild(child: RigidTransform): void
 	{
 		const index = this._children.findIndex(c => c.id === child.id);
 
@@ -132,7 +132,7 @@ export class Transform extends ComponentProtocol
 		child._parent = undefined;
 	}
 
-	private _IsDescendant(descendant: Transform): boolean
+	private _IsDescendant(descendant: RigidTransform): boolean
 	{
 		return this._children.some(child => child.id === descendant.id || child._IsDescendant(descendant));
 	}

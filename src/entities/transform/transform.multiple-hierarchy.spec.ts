@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Transform } from './transform';
+import { RigidTransform } from './transform';
 import { Vector2 } from '..';
 import { FakeIdGenerator } from '@/__test__';
 
@@ -9,9 +9,9 @@ describe("multiple hierarchy: parent -> child -> child", () =>
 {
 	it("should SetParent", () =>
 	{
-		const parent = new Transform(fakeIdGenerator, new Vector2(5, 5));
-		const childA = new Transform(fakeIdGenerator, new Vector2(10, 10));
-		const childB = new Transform(fakeIdGenerator, new Vector2(15, 15));
+		const parent = new RigidTransform(fakeIdGenerator, new Vector2(5, 5));
+		const childA = new RigidTransform(fakeIdGenerator, new Vector2(10, 10));
+		const childB = new RigidTransform(fakeIdGenerator, new Vector2(15, 15));
 
 		childA.SetParent(parent);
 		childB.SetParent(childA);
@@ -33,9 +33,9 @@ describe("multiple hierarchy: parent -> child -> child", () =>
 
 	it("should UnsetParent", () =>
 	{
-		const parent = new Transform(fakeIdGenerator, new Vector2(5, 5));
-		const childA = new Transform(fakeIdGenerator, new Vector2(10, 10));
-		const childB = new Transform(fakeIdGenerator, new Vector2(15, 15));
+		const parent = new RigidTransform(fakeIdGenerator, new Vector2(5, 5));
+		const childA = new RigidTransform(fakeIdGenerator, new Vector2(10, 10));
+		const childB = new RigidTransform(fakeIdGenerator, new Vector2(15, 15));
 
 		childA.SetParent(parent);
 		childB.SetParent(childA);
@@ -79,9 +79,9 @@ describe("multiple hierarchy: parent -> child -> child", () =>
 
 	it("should change parent and child worldPosition", () =>
 	{
-		const parent = new Transform(fakeIdGenerator, new Vector2(5, 5));
-		const childA = new Transform(fakeIdGenerator, new Vector2(10, 10));
-		const childB = new Transform(fakeIdGenerator, new Vector2(15, 15));
+		const parent = new RigidTransform(fakeIdGenerator, new Vector2(5, 5));
+		const childA = new RigidTransform(fakeIdGenerator, new Vector2(10, 10));
+		const childB = new RigidTransform(fakeIdGenerator, new Vector2(15, 15));
 
 		childA.SetParent(parent);
 		childB.SetParent(childA);
@@ -145,9 +145,9 @@ describe("multiple hierarchy: parent -> child -> child", () =>
 
 	it("should change parent and child localPosition", () =>
 	{
-		const parent = new Transform(fakeIdGenerator, new Vector2(5, 5));
-		const childA = new Transform(fakeIdGenerator, new Vector2(10, 10));
-		const childB = new Transform(fakeIdGenerator, new Vector2(15, 15));
+		const parent = new RigidTransform(fakeIdGenerator, new Vector2(5, 5));
+		const childA = new RigidTransform(fakeIdGenerator, new Vector2(10, 10));
+		const childB = new RigidTransform(fakeIdGenerator, new Vector2(15, 15));
 
 		childA.SetParent(parent);
 		childB.SetParent(childA);
@@ -211,9 +211,9 @@ describe("multiple hierarchy: parent -> child -> child", () =>
 
 	it("should stay in place after UnsetParent", () =>
 	{
-		const parent = new Transform(fakeIdGenerator, new Vector2(5, 5));
-		const childA = new Transform(fakeIdGenerator, new Vector2(10, 10));
-		const childB = new Transform(fakeIdGenerator, new Vector2(15, 15));
+		const parent = new RigidTransform(fakeIdGenerator, new Vector2(5, 5));
+		const childA = new RigidTransform(fakeIdGenerator, new Vector2(10, 10));
+		const childB = new RigidTransform(fakeIdGenerator, new Vector2(15, 15));
 
 		childA.SetParent(parent);
 		childB.SetParent(childA);

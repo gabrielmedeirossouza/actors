@@ -6,3 +6,4 @@ export * from './collider-protocol';
 export * from './collider-detection-handler-protocol';
 export * from './image-protocol';
 export * from './id-generator-protocol';
+export * from './transform-protocol';

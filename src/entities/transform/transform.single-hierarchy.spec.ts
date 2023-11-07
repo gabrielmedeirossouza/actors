@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Transform } from './transform';
+import { RigidTransform } from './transform';
 import { Vector2 } from '..';
 import { FakeIdGenerator } from '@/__test__';
 
@@ -9,7 +9,7 @@ describe("single hierarchy: parent -> child", () =>
 {
 	it('should create empty transform', () =>
 	{
-		const transform = new Transform(fakeIdGenerator);
+		const transform = new RigidTransform(fakeIdGenerator);
 
 		expect(transform.parent).toBe(undefined);
 		expect(transform.children).toEqual([]);
@@ -22,8 +22,8 @@ describe("single hierarchy: parent -> child", () =>
 
 	it("should SetParent", () =>
 	{
-		const parent = new Transform(fakeIdGenerator, new Vector2(5, 5));
-		const child = new Transform(fakeIdGenerator, new Vector2(10, 10));
+		const parent = new RigidTransform(fakeIdGenerator, new Vector2(5, 5));
+		const child = new RigidTransform(fakeIdGenerator, new Vector2(10, 10));
 
 		child.SetParent(parent);
 
@@ -38,8 +38,8 @@ describe("single hierarchy: parent -> child", () =>
 
 	it("should UnsetParent", () =>
 	{
-		const parent = new Transform(fakeIdGenerator, new Vector2(5, 5));
-		const child = new Transform(fakeIdGenerator, new Vector2(10, 10));
+		const parent = new RigidTransform(fakeIdGenerator, new Vector2(5, 5));
+		const child = new RigidTransform(fakeIdGenerator, new Vector2(10, 10));
 
 		child.SetParent(parent);
 		child.UnsetParent();
@@ -55,8 +55,8 @@ describe("single hierarchy: parent -> child", () =>
 
 	it("should change parent and child worldPosition", () =>
 	{
-		const parent = new Transform(fakeIdGenerator, new Vector2(5, 5));
-		const child = new Transform(fakeIdGenerator, new Vector2(10, 10));
+		const parent = new RigidTransform(fakeIdGenerator, new Vector2(5, 5));
+		const child = new RigidTransform(fakeIdGenerator, new Vector2(10, 10));
 
 		child.SetParent(parent);
 
@@ -93,8 +93,8 @@ describe("single hierarchy: parent -> child", () =>
 
 	it("should change parent and child localPosition", () =>
 	{
-		const parent = new Transform(fakeIdGenerator, new Vector2(5, 5));
-		const child = new Transform(fakeIdGenerator, new Vector2(10, 10));
+		const parent = new RigidTransform(fakeIdGenerator, new Vector2(5, 5));
+		const child = new RigidTransform(fakeIdGenerator, new Vector2(10, 10));
 
 		child.SetParent(parent);
 
@@ -131,8 +131,8 @@ describe("single hierarchy: parent -> child", () =>
 
 	it("should stay in place after UnsetParent", () =>
 	{
-		const parent = new Transform(fakeIdGenerator, new Vector2(5, 5));
-		const child = new Transform(fakeIdGenerator, new Vector2(10, 10));
+		const parent = new RigidTransform(fakeIdGenerator, new Vector2(5, 5));
+		const child = new RigidTransform(fakeIdGenerator, new Vector2(10, 10));
 
 		child.SetParent(parent);
 		parent.worldPosition = new Vector2(0, 0);

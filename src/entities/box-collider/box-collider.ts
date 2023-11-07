@@ -1,5 +1,4 @@
-import { ColliderProtocol, IdGeneratorProtocol } from "@/protocols";
-import { Transform } from "@/entities";
+import { ColliderProtocol, IdGeneratorProtocol, TransformProtocol } from "@/protocols";
 
 export class BoxCollider extends ColliderProtocol
 {
@@ -8,7 +7,7 @@ export class BoxCollider extends ColliderProtocol
 
 	constructor(
 		idGenerator: IdGeneratorProtocol,
-		transform: Transform,
+		transform: TransformProtocol,
 		width: number,
 		height: number
 	)

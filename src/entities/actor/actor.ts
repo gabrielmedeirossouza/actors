@@ -1,5 +1,5 @@
-import { IdGeneratorProtocol } from '@/protocols';
-import { ComponentManager, Transform } from '../';
+import { IdGeneratorProtocol, TransformProtocol } from '@/protocols';
+import { ComponentManager } from '../';
 
 export class Actor
 {
@@ -8,7 +8,7 @@ export class Actor
 	constructor(
 		idGenerator: IdGeneratorProtocol,
 		public readonly name: string,
-		public readonly transform: Transform,
+		public readonly transform: TransformProtocol,
 		public readonly componentManager: ComponentManager
 	)
 	{

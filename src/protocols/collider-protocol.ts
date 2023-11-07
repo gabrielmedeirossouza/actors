@@ -1,14 +1,14 @@
-import { Transform } from "@/entities";
-import { PhysicsProtocol } from "./physics-protocol";
 import { IdGeneratorProtocol } from "./id-generator-protocol";
+import { ComponentProtocol } from "./component-protocol";
+import { TransformProtocol } from "./transform-protocol";
 
-export abstract class ColliderProtocol extends PhysicsProtocol
+export abstract class ColliderProtocol extends ComponentProtocol
 {
 	public isTrigger = false;
 
 	constructor(
 		idGenerator: IdGeneratorProtocol,
-    public readonly transform: Transform
+    public readonly transform: TransformProtocol
 	)
 	{
 		super(idGenerator);

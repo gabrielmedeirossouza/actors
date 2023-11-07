@@ -1,5 +1,4 @@
-import { ColliderProtocol, IdGeneratorProtocol } from "@/protocols";
-import { Transform } from "@/entities";
+import { ColliderProtocol, IdGeneratorProtocol, TransformProtocol } from "@/protocols";
 
 export class CircleCollider extends ColliderProtocol
 {
@@ -7,7 +6,7 @@ export class CircleCollider extends ColliderProtocol
 
 	constructor(
 		idGenerator: IdGeneratorProtocol,
-		transform: Transform,
+		transform: TransformProtocol,
 		radius: number
 	)
 	{
