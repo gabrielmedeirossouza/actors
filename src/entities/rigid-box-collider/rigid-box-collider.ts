@@ -1,9 +1,9 @@
-import { ColliderProtocol, IdGeneratorProtocol, TransformProtocol } from "@/protocols";
+import { BoxColliderProtocol, IdGeneratorProtocol, TransformProtocol } from "@/protocols";
 
-export class BoxCollider extends ColliderProtocol
+export class RigidBoxCollider extends BoxColliderProtocol
 {
-	private _width: number;
-	private _height: number;
+	protected _width: number;
+	protected _height: number;
 
 	constructor(
 		idGenerator: IdGeneratorProtocol,
@@ -12,7 +12,7 @@ export class BoxCollider extends ColliderProtocol
 		height: number
 	)
 	{
-		super(idGenerator, transform);
+		super(idGenerator, transform, width, height);
 		this._width = this._GetVerifiedWidth(width);
 		this._height = this._GetVerifiedHeight(height);
 	}

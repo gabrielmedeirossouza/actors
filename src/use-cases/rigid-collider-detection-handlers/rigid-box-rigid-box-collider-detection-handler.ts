@@ -1,7 +1,6 @@
-import { BoxCollider } from "@/entities";
-import { ColliderDetectionHandlerProtocol, ColliderProtocol } from "@/protocols";
+import { ColliderDetectionHandlerProtocol, ColliderProtocol, BoxColliderProtocol } from "@/protocols";
 
-export class BoxBoxColliderDetectionHandler extends ColliderDetectionHandlerProtocol
+export class RigidBoxRigidBoxColliderDetectionHandler extends ColliderDetectionHandlerProtocol
 {
 	constructor(
 		next?: ColliderDetectionHandlerProtocol
@@ -12,7 +11,7 @@ export class BoxBoxColliderDetectionHandler extends ColliderDetectionHandlerProt
 
 	public IsColliding(a: ColliderProtocol, b: ColliderProtocol): boolean
 	{
-		if (a instanceof BoxCollider && b instanceof BoxCollider)
+		if (a instanceof BoxColliderProtocol && b instanceof BoxColliderProtocol)
 		{
 			const aX = a.transform.worldPosition.x - a.width / 2;
 			const aY = a.transform.worldPosition.y - a.height / 2;

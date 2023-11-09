@@ -7,9 +7,12 @@ export abstract class CircleColliderProtocol extends ColliderProtocol
 	constructor(
 		idGenerator: IdGeneratorProtocol,
     public readonly transform: TransformProtocol,
-    public readonly radius: number
+    protected _radius: number
 	)
 	{
 		super(idGenerator, transform);
 	}
+
+	public abstract get radius(): number;
+	public abstract set radius(value: number);
 }

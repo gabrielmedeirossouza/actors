@@ -1,7 +1,6 @@
-import { BoxCollider, CircleCollider } from "@/entities";
-import { ColliderDetectionHandlerProtocol, ColliderProtocol } from "@/protocols";
+import { ColliderDetectionHandlerProtocol, ColliderProtocol, BoxColliderProtocol, CircleColliderProtocol } from "@/protocols";
 
-export class BoxCircleColliderDetectionHandler extends ColliderDetectionHandlerProtocol
+export class RigidBoxRigidCircleColliderDetectionHandler extends ColliderDetectionHandlerProtocol
 {
 	constructor(
 		next?: ColliderDetectionHandlerProtocol
@@ -12,8 +11,8 @@ export class BoxCircleColliderDetectionHandler extends ColliderDetectionHandlerP
 
 	public IsColliding(a: ColliderProtocol, b: ColliderProtocol): boolean
 	{
-		const isBoxCircle = a instanceof BoxCollider && b instanceof CircleCollider;
-		const isCircleBox = a instanceof CircleCollider && b instanceof BoxCollider;
+		const isBoxCircle = a instanceof BoxColliderProtocol && b instanceof CircleColliderProtocol;
+		const isCircleBox = a instanceof CircleColliderProtocol && b instanceof BoxColliderProtocol;
 
 		if (isBoxCircle) return this._IsCollidingBoxCircle(a, b);
 		else if (isCircleBox) return this._IsCollidingBoxCircle(b, a);
@@ -21,7 +20,7 @@ export class BoxCircleColliderDetectionHandler extends ColliderDetectionHandlerP
 		return this._expectNextOrThrow.IsColliding(a, b);
 	}
 
-	private _IsCollidingBoxCircle(a: BoxCollider, b: CircleCollider): boolean
+	private _IsCollidingBoxCircle(a: BoxColliderProtocol, b: CircleColliderProtocol): boolean
 	{
 		const box = a;
 		const circle = b;

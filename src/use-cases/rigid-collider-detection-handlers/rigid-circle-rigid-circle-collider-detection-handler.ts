@@ -1,7 +1,6 @@
-import { CircleCollider } from "@/entities";
-import { ColliderDetectionHandlerProtocol, ColliderProtocol } from "@/protocols";
+import { ColliderDetectionHandlerProtocol, ColliderProtocol, CircleColliderProtocol } from "@/protocols";
 
-export class CircleCircleColliderDetectionHandler extends ColliderDetectionHandlerProtocol
+export class RigidCircleRigidCircleColliderDetectionHandler extends ColliderDetectionHandlerProtocol
 {
 	constructor(
 		next?: ColliderDetectionHandlerProtocol
@@ -12,7 +11,7 @@ export class CircleCircleColliderDetectionHandler extends ColliderDetectionHandl
 
 	public IsColliding(a: ColliderProtocol, b: ColliderProtocol): boolean
 	{
-		if (a instanceof CircleCollider && b instanceof CircleCollider)
+		if (a instanceof CircleColliderProtocol && b instanceof CircleColliderProtocol)
 		{
 			const distance = Math.sqrt(
 				Math.pow(a.transform.worldPosition.x - b.transform.worldPosition.x, 2) +
