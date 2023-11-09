@@ -7,3 +7,5 @@ export * from './collider-detection-handler-protocol';
 export * from './image-protocol';
 export * from './id-generator-protocol';
 export * from './transform-protocol';
+export * from './box-collider-protocol';
+export * from './circle-collider-protocol';
