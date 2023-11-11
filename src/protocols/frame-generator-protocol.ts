@@ -1,32 +1,13 @@
-type TLoop = (callback: (time: number) => void) => void;
-
-function __loop_test_mode__(): TLoop
-{
-	let time = 0;
-	const TIME_STEP = 1 / 50;
-
-	return (callback: (time: number) => void): void =>
-	{
-		time += TIME_STEP;
-		callback(time);
-	};
-}
-
 export abstract class FrameGeneratorProtocol
 {
 	private _isRunning = false;
 	private _oldTime = 0;
-	protected readonly _loop: TLoop;
 
 	constructor(
-		loop: TLoop,
+		protected readonly _loop: (callback: (time: number) => void) => void,
 		protected readonly _callback: (time: number, deltaTime: number) => void
 	)
-	{
-		this._loop = process.env.NODE_ENV === "test"
-			? __loop_test_mode__()
-			: loop;
-	}
+	{}
 
 	public Start(): void
 	{

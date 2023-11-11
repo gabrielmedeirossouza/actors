@@ -1,9 +1,9 @@
 import { it, expect } from 'vitest';
-import { WebFrameGenerator } from './web-frame-generator';
+import { FakeFrameGenerator } from './fake-frame-generator';
 
 it("Should loop through the frames and generate the web frame", () =>
 {
-	const sut = new WebFrameGenerator(loop);
+	const sut = new FakeFrameGenerator(loop);
 
 	let hasCalled = false;
 	let calls = 0;
