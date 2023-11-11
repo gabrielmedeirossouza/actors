@@ -1,5 +1,4 @@
 import { IdGeneratorProtocol, TransformProtocol } from '@/protocols';
-import { ComponentManager } from '../';
 
 export class Actor
 {
@@ -8,8 +7,7 @@ export class Actor
 	constructor(
 		idGenerator: IdGeneratorProtocol,
 		public readonly name: string,
-		public readonly transform: TransformProtocol,
-		public readonly componentManager: ComponentManager
+		public readonly transform: TransformProtocol
 	)
 	{
 		this.id = idGenerator.Generate();

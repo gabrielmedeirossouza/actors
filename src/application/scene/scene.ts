@@ -26,7 +26,7 @@ export class Scene
 	{
 		this._actors.forEach(actor =>
 		{
-			actor.componentManager.NotifyUpdate(time, deltaTime);
+			// actor.componentManager.NotifyUpdate(time, deltaTime);
 		});
 	}
 }
