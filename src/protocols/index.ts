@@ -9,3 +9,4 @@ export * from './id-generator-protocol';
 export * from './transform-protocol';
 export * from './box-collider-protocol';
 export * from './circle-collider-protocol';
+export * from './texture-protocol';
