@@ -10,3 +10,4 @@ export * from './texture-protocol';
 export * from './actor-protocol';
 export * from './file-loader-protocol';
 export * from './load-texture-protocol';
+export * from './collider-double-dispatch-protocol';

@@ -1,6 +1,6 @@
+import { Vector2 } from "@/entities";
 import { ColliderProtocol } from "./collider-protocol";
 import { IdGeneratorProtocol } from "./id-generator-protocol";
-import { TransformProtocol } from "./transform-protocol";
 
 export abstract class CircleColliderProtocol extends ColliderProtocol
 {
@@ -8,9 +8,9 @@ export abstract class CircleColliderProtocol extends ColliderProtocol
 
 	constructor(
 		idGenerator: IdGeneratorProtocol,
-    public readonly transform: TransformProtocol,
+    public readonly position: Readonly<Vector2>,
 	)
 	{
-		super(idGenerator, transform);
+		super(idGenerator, position);
 	}
 }
