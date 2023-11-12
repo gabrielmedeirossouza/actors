@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "lint": "npx eslint . --ext .ts --fix"
   },
   "devDependencies": {
     "@types/node": "^20.8.4",

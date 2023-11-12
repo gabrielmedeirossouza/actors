@@ -21,12 +21,4 @@ export class Scene
 
 		this._actors.splice(index, 1);
 	}
-
-	public NotifyUpdate(time: number, deltaTime: number): void
-	{
-		this._actors.forEach(actor =>
-		{
-			// actor.componentManager.NotifyUpdate(time, deltaTime);
-		});
-	}
 }
