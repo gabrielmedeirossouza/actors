@@ -10,3 +10,6 @@ export * from './actor-protocol';
 export * from './file-loader-protocol';
 export * from './load-texture-protocol';
 export * from './collider-double-dispatch-protocol';
+export * from './sprite-protocol';
+export * from './render-sprite-protocol';
+export * from './sprite-renderer-protocol';
