@@ -1,7 +1,6 @@
-import { ImageProtocol } from "./image-protocol";
-
 export interface TextureProtocol {
-  image?: ImageProtocol
+  readonly image?: ArrayBuffer
   width: number
   height: number
+  SetImage(image: ArrayBuffer): void
 }

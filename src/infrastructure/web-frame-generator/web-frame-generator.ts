@@ -6,6 +6,9 @@ export class WebFrameGenerator extends FrameGeneratorProtocol
 		protected readonly _callback: (time: number, deltaTime: number) => void
 	)
 	{
+		if (typeof window === 'undefined') throw new Error('WebFrameGenerator requires window');
+		if (window.requestAnimationFrame === undefined) throw new Error('Missing: requestAnimationFrame not found');
+
 		super(WebFrameGenerator._GetNormalizedRequestAnimationFrame(), _callback);
 	}
 

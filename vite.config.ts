@@ -1,14 +1,13 @@
 import { defineConfig } from 'vitest/config';
-import path, { resolve } from 'node:path';
+import path from 'node:path';
 
 export default defineConfig({
-	build: { lib: { entry: resolve(__dirname, 'src/main.ts'), formats: ['es'] } },
 	server: {
 		port: 3000,
 	},
 	resolve: {
 		alias: {
-			'@': path.resolve(__dirname, './src'),
+			'@': path.resolve(path.dirname('.'), './src'),
 		},
 	},
 	test: {

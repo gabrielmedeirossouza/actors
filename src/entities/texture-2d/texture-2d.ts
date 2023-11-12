@@ -1,8 +1,8 @@
-import { ImageProtocol, TextureProtocol } from "@/protocols";
+import { TextureProtocol } from "@/protocols";
 
 export class Texture2D implements TextureProtocol
 {
-	public image?: ImageProtocol;
+	private _image?: ArrayBuffer;
 	private _width: number;
 	private _height: number;
 
@@ -33,6 +33,16 @@ export class Texture2D implements TextureProtocol
 	public set height(value: number)
 	{
 		this._height = this._GetVerifiedHeight(value);
+	}
+
+	public get image(): ArrayBuffer | undefined
+	{
+		return this._image;
+	}
+
+	public SetImage(image: ArrayBuffer): void
+	{
+		this._image = image;
 	}
 
 	private _GetVerifiedWidth(width: number): number
