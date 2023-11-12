@@ -2,8 +2,8 @@ import { BoxColliderProtocol, IdGeneratorProtocol, TransformProtocol } from "@/p
 
 export class RigidBoxCollider extends BoxColliderProtocol
 {
-	protected _width: number;
-	protected _height: number;
+	private _width: number;
+	private _height: number;
 
 	constructor(
 		idGenerator: IdGeneratorProtocol,
@@ -12,7 +12,7 @@ export class RigidBoxCollider extends BoxColliderProtocol
 		height: number
 	)
 	{
-		super(idGenerator, transform, width, height);
+		super(idGenerator, transform);
 		this._width = this._GetVerifiedWidth(width);
 		this._height = this._GetVerifiedHeight(height);
 	}

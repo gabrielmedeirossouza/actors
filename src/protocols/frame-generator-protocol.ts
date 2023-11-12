@@ -4,8 +4,8 @@ export abstract class FrameGeneratorProtocol
 	private _oldTime = 0;
 
 	constructor(
-		protected readonly _loop: (callback: (time: number) => void) => void,
-		protected readonly _callback: (time: number, deltaTime: number) => void
+		private readonly _loop: (callback: (time: number) => void) => void,
+		private readonly _callback: (time: number, deltaTime: number) => void
 	)
 	{}
 

@@ -4,18 +4,14 @@ import { TransformProtocol } from "./transform-protocol";
 
 export abstract class BoxColliderProtocol extends ColliderProtocol
 {
+	public abstract width: number;
+	public abstract height: number;
+
 	constructor(
 		idGenerator: IdGeneratorProtocol,
-    public readonly transform: TransformProtocol,
-    protected _width: number,
-    protected _height: number
+    public readonly transform: TransformProtocol
 	)
 	{
 		super(idGenerator, transform);
 	}
-
-	public abstract get width(): number;
-	public abstract set width(value: number);
-	public abstract get height(): number;
-	public abstract set height(value: number);
 }

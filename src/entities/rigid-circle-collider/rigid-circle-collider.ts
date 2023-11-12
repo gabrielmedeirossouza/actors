@@ -2,7 +2,7 @@ import { CircleColliderProtocol, IdGeneratorProtocol, TransformProtocol } from "
 
 export class RigidCircleCollider extends CircleColliderProtocol
 {
-	protected _radius: number;
+	private _radius: number;
 
 	constructor(
 		idGenerator: IdGeneratorProtocol,
@@ -10,7 +10,7 @@ export class RigidCircleCollider extends CircleColliderProtocol
 		radius: number
 	)
 	{
-		super(idGenerator, transform, radius);
+		super(idGenerator, transform);
 		this._radius = this._GetVerifiedRadius(radius);
 	}
 
