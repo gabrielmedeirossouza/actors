@@ -1,7 +1,6 @@
 export * from './component-protocol';
 export * from './frame-generator-protocol';
 export * from './collider-protocol';
-export * from './collider-detection-handler-protocol';
 export * from './id-generator-protocol';
 export * from './transform-protocol';
 export * from './box-collider-protocol';
